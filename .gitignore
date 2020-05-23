@@ -1,8 +1,6 @@
 server/node_modules
-server/yarn.lock
 server/yarn-error.log
 
 app/node_modules
 app/public
-app/yarn.lock
 app/yarn-error.log
