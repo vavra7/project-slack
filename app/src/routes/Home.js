@@ -1,9 +1,11 @@
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
 
-const Home = ({data}) => <div>
-  <pre>{JSON.stringify(data, null, 2)}</pre>
-</div>;
+const Home = ({ data }) => (
+  <div>
+    <pre>{JSON.stringify(data, null, 2)}</pre>
+  </div>
+);
 
 const allUsersQuery = gql`
   {
