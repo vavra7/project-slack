@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Message, Container, Header, Input, Button } from 'semantic-ui-react';
+import { Form, Message, Container, Header, Input, Button } from 'semantic-ui-react';
 import { gql, graphql } from 'react-apollo';
 
 class Register extends Component {
@@ -68,33 +68,32 @@ class Register extends Component {
       <Container text>
         <Header as="h2">Register</Header>
 
-        <Input
-          name="username"
-          error={!!usernameError}
-          onChange={this.onChange}
-          value={username}
-          placeholder="Username"
-          fluid
-        />
-        <Input
-          name="email"
-          error={!!emailError}
-          onChange={this.onChange}
-          value={email}
-          placeholder="Email"
-          fluid
-        />
-        <Input
-          name="password"
-          error={!!passwordError}
-          onChange={this.onChange}
-          value={password}
-          placeholder="Password"
-          fluid
-          type="password"
-        />
-        <Button onClick={this.onSubmit}>Submit</Button>
-        {usernameError || emailError || passwordError ? (
+        <Form>
+          <Form.Field error={!!usernameError}>
+            <Input
+              name="username"
+              onChange={this.onChange}
+              value={username}
+              placeholder="Username"
+              fluid
+            />
+          </Form.Field>
+          <Form.Field error={!!emailError}>
+            <Input name="email" onChange={this.onChange} value={email} placeholder="Email" fluid />
+          </Form.Field>
+          <Form.Field error={!!passwordError}>
+            <Input
+              name="password"
+              onChange={this.onChange}
+              value={password}
+              placeholder="Password"
+              fluid
+              type="password"
+            />
+          </Form.Field>
+          <Button onClick={this.onSubmit}>Submit</Button>
+        </Form>
+        {errorList.length ? (
           <Message error header="There was some errors with your submission" list={errorList} />
         ) : null}
       </Container>

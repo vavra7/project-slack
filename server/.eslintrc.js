@@ -16,6 +16,8 @@ module.exports = {
     'comma-dangle': 0,
     'import/prefer-default-export': 0,
     'arrow-parens': 0,
-    'no-console': 0
+    'no-console': 0,
+    'implicit-arrow-linebreak': 0,
+    'no-param-reassign': 0
   }
 };
