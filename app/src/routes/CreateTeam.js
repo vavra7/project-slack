@@ -10,15 +10,22 @@ class CreateTeam extends React.Component {
 
     extendObservable(this, {
       name: '',
-      errors: {},
+      errors: {}
     });
   }
 
   onSubmit = async () => {
     const { name } = this;
-    const response = await this.props.mutate({
-      variables: { name },
-    });
+    let response = null;
+
+    try {
+      response = await this.props.mutate({
+        variables: { name }
+      });
+    } catch (err) {
+      this.props.history.push('/login');
+      return;
+    }
 
     console.log(response);
 
@@ -36,13 +43,16 @@ class CreateTeam extends React.Component {
     }
   };
 
-  onChange = (e) => {
+  onChange = e => {
     const { name, value } = e.target;
     this[name] = value;
   };
 
   render() {
-    const { name, errors: { nameError } } = this;
+    const {
+      name,
+      errors: { nameError }
+    } = this;
 
     const errorList = [];
 
