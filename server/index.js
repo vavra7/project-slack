@@ -8,6 +8,8 @@ import cors from 'cors';
 import models from './models';
 
 const GRAPHQL_ENDPOINT = '/graphql';
+const SECRET = 'LKSFFJASJDJJDKLlksjafdoasohfd';
+const SECRET2 = 'LKLADSLKAJF';
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
@@ -26,6 +28,8 @@ app.use(
     schema,
     context: {
       models,
+      SECRET,
+      SECRET2,
       user: {
         id: 1
       }
