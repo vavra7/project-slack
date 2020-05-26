@@ -1,16 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import decode from 'jwt-decode';
+
 import Home from './Home';
 import Register from './Register';
 import Login from './Login';
 import CreateTeam from './CreateTeam';
-import decode from 'jwt-decode';
 import ViewTeam from './ViewTeam';
 
 const isAuthenticated = () => {
   const token = localStorage.getItem('token');
   const refreshToken = localStorage.getItem('refreshToken');
-
   try {
     decode(token);
     decode(refreshToken);
