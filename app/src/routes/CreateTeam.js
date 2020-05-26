@@ -5,14 +5,13 @@ import { Message, Form, Button, Input, Container, Header } from 'semantic-ui-rea
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-
 class CreateTeam extends React.Component {
   constructor(props) {
     super(props);
 
     extendObservable(this, {
       name: '',
-      errors: {}
+      errors: {},
     });
   }
 
@@ -22,7 +21,7 @@ class CreateTeam extends React.Component {
 
     try {
       response = await this.props.mutate({
-        variables: { name }
+        variables: { name },
       });
     } catch (err) {
       this.props.history.push('/login');
@@ -31,10 +30,10 @@ class CreateTeam extends React.Component {
 
     console.log(response);
 
-    const { ok, errors } = response.data.createTeam;
+    const { ok, errors, team } = response.data.createTeam;
 
     if (ok) {
-      this.props.history.push('/');
+      this.props.history.push(`/view-team/${team.id}`);
     } else {
       const err = {};
       errors.forEach(({ path, message }) => {
@@ -45,16 +44,13 @@ class CreateTeam extends React.Component {
     }
   };
 
-  onChange = e => {
+  onChange = (e) => {
     const { name, value } = e.target;
     this[name] = value;
   };
 
   render() {
-    const {
-      name,
-      errors: { nameError }
-    } = this;
+    const { name, errors: { nameError } } = this;
 
     const errorList = [];
 
@@ -83,6 +79,9 @@ const createTeamMutation = gql`
   mutation($name: String!) {
     createTeam(name: $name) {
       ok
+      team {
+        id
+      }
       errors {
         path
         message
