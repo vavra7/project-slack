@@ -3,7 +3,7 @@ export default `
     id: Int!
     name: String!
     owner: User!
-    members: [User]!
+    members: [User!]!
     channels: [Channel!]!
   }
 
@@ -17,7 +17,13 @@ export default `
     allTeams: [Team!]!
   }
 
+  type VoidResponse {
+    ok: Boolean!
+    errors: [Error!]
+  }
+  
   type Mutation {
     createTeam(name: String!): CreateTeamResponse!
+    addTeamMember(email: String!, teamId: Int!): VoidResponse!
   }
 `;
